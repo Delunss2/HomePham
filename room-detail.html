@@ -61,8 +61,11 @@
             id="roomVideo"
             class="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
             controls
-            preload="metadata"
+            preload="none"
+            playsinline
+            webkit-playsinline
             poster=""
+            muted
           >
             <source src="" type="video/mp4" />
             Trình duyệt của bạn không hỗ trợ video HTML5.
@@ -73,7 +76,28 @@
           >
             <div class="text-center">
               <div class="text-4xl mb-2">🎬</div>
-              <p>Video tour phòng sẽ được cập nhật sớm</p>
+              <p class="text-sm sm:text-base px-4">
+                Video tour phòng sẽ được cập nhật sớm
+              </p>
+              <p class="text-xs text-gray-400 mt-2 px-4">
+                Trên iPhone: Nhấn vào video để phát
+              </p>
+            </div>
+          </div>
+          <!-- Play button overlay for better mobile experience -->
+          <div
+            id="playButton"
+            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+            style="display: none"
+          >
+            <div class="bg-white bg-opacity-90 rounded-full p-4">
+              <svg
+                class="w-8 h-8 text-gray-800"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
             </div>
           </div>
         </div>
@@ -258,7 +282,7 @@
       capacity: 2,
       area: "20m²",
       image: "./images/p2-1.jpg",
-      video: "./videos/p2.mp4", // Video tour phòng
+      video: "./videos/p2.mp4",
       images: [
         "./images/p2-1.jpg",
         "./images/p2-2.jpg",
@@ -346,30 +370,67 @@
     facilitiesContainer.appendChild(span);
   });
 
-  // Video handling
+  // Video handling - improved for iPhone/iOS
   const videoElement = document.getElementById("roomVideo");
   const videoPlaceholder = document.getElementById("videoPlaceholder");
+  const playButton = document.getElementById("playButton");
+
+  // Function to check if device is iOS
+  function isIOS() {
+    return (
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    );
+  }
 
   if (room.video) {
-    // Check if video file exists by trying to load it
-    const testVideo = document.createElement("video");
-    testVideo.onloadeddata = () => {
-      // Video exists and can be loaded
-      videoElement.src = room.video;
-      videoElement.poster = room.image; // Use room image as poster
+    // Try to load video with better error handling
+    const videoSource = videoElement.querySelector("source");
+    videoSource.src = room.video;
+    videoElement.poster = room.image;
+
+    // Enhanced video loading for iOS
+    videoElement.oncanplay = () => {
       videoPlaceholder.style.display = "none";
       videoElement.style.display = "block";
+
+      // Show play button overlay for iOS devices
+      if (isIOS()) {
+        playButton.style.display = "flex";
+
+        // Add click handler for iOS
+        playButton.onclick = (e) => {
+          e.preventDefault();
+          playButton.style.display = "none";
+          videoElement.play().catch((err) => {
+            console.log("Video play failed:", err);
+            // Fallback: show placeholder again
+            videoPlaceholder.style.display = "flex";
+            videoElement.style.display = "none";
+          });
+        };
+
+        // Hide play button when video starts playing
+        videoElement.onplay = () => {
+          playButton.style.display = "none";
+        };
+      }
     };
-    testVideo.onerror = () => {
-      // Video doesn't exist, show placeholder
+
+    videoElement.onerror = () => {
+      console.log("Video failed to load");
       videoPlaceholder.style.display = "flex";
       videoElement.style.display = "none";
+      playButton.style.display = "none";
     };
-    testVideo.src = room.video;
+
+    // Load the video
+    videoElement.load();
   } else {
     // No video specified, show placeholder
     videoPlaceholder.style.display = "flex";
     videoElement.style.display = "none";
+    playButton.style.display = "none";
   }
 
   function changeImage(imageUrl) {
