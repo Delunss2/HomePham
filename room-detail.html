@@ -1,309 +1,379 @@
 <!DOCTYPE html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chi tiết phòng trọ - Home Phạm</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body class="bg-gray-50">
+  <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
-            <div class="flex mx-auto justify-between items-center h-16">
-                <a href="/" class="block w-[16rem] lg:w-[14rem] h-[4rem]">
-                    <figure class="flex items-center mx-auto sm:mx-0 w-full h-full">
-                        <img class="w-full h-full object-cover" src="./images/logo-prve.png" alt="Logo Home Phạm">
-                    </figure>
-                </a>
+      <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
+        <div class="flex mx-auto justify-between items-center h-16">
+          <a href="/" class="block w-[16rem] lg:w-[14rem] h-[4rem]">
+            <figure class="flex items-center mx-auto sm:mx-0 w-full h-full">
+              <img
+                class="w-full h-full object-cover"
+                src="./images/logo-prve.png"
+                alt="Logo Home Phạm"
+              />
+            </figure>
+          </a>
 
-                <nav class="hidden md:flex space-x-8">
-                    <a href="./index.html" class="text-gray-700 hover:text-green-600">Trang Chủ</a>
-                    <a href="https://zalo.me/0878808885" target="_blank" class="text-gray-700 hover:text-green-600">Liên
-                        Hệ</a>
-                </nav>
-
-            </div>
+          <nav class="hidden md:flex space-x-8">
+            <a href="./index.html" class="text-gray-700 hover:text-green-600"
+              >Trang Chủ</a
+            >
+            <a
+              href="https://zalo.me/0878808885"
+              target="_blank"
+              class="text-gray-700 hover:text-green-600"
+              >Liên Hệ</a
+            >
+          </nav>
         </div>
+      </div>
     </header>
 
     <!-- Room Detail -->
     <main class="max-w-5xl mx-auto p-6 md:p-12">
-        <!-- Ảnh chính và ảnh nhỏ -->
-        <div class="mb-8">
-            <div id="mainImage" class="h-64 md:h-96 bg-cover bg-center rounded-lg shadow mb-4"></div>
-            <div class="grid grid-cols-4 gap-2" id="thumbnailImages"></div>
+      <!-- Ảnh chính và ảnh nhỏ -->
+      <div class="mb-8">
+        <div
+          id="mainImage"
+          class="h-48 sm:h-64 md:h-80 lg:h-96 bg-cover bg-center rounded-lg shadow mb-4"
+        ></div>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 gap-2"
+          id="thumbnailImages"
+        ></div>
+      </div>
+
+      <!-- Video Tour Section -->
+      <div class="mb-8" id="videoSection">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">
+          🎥 Video Tour Phòng
+        </h2>
+        <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+          <video
+            id="roomVideo"
+            class="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
+            controls
+            preload="metadata"
+            poster=""
+          >
+            <source src="" type="video/mp4" />
+            Trình duyệt của bạn không hỗ trợ video HTML5.
+          </video>
+          <div
+            id="videoPlaceholder"
+            class="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-500"
+          >
+            <div class="text-center">
+              <div class="text-4xl mb-2">🎬</div>
+              <p>Video tour phòng sẽ được cập nhật sớm</p>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Thông tin chính -->
-        <div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-6">
-            <div>
-                <h1 id="roomTitle" class="text-3xl font-bold text-gray-900 mb-2"></h1>
-                <div class="flex items-center text-yellow-400 text-lg" id="roomRating"></div>
-            </div>
-            <div class="flex gap-2 text-right">
-                <div id="roomPrice" class="text-3xl text-green-600 font-bold mb-1"></div>
-                <div class="text-gray-600">/ tháng</div>
-            </div>
+      <!-- Thông tin chính -->
+      <div
+        class="flex flex-col lg:flex-row justify-between items-start mb-8 gap-4 lg:gap-6"
+      >
+        <div class="w-full lg:w-auto">
+          <h1
+            id="roomTitle"
+            class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2"
+          ></h1>
+          <div
+            class="flex items-center text-yellow-400 text-base sm:text-lg"
+            id="roomRating"
+          ></div>
         </div>
-
-        <!-- Thông tin chi tiết -->
-        <div class="grid grid-cols-3 bg-gray-100 p-4 rounded-lg mb-8 text-center">
-            <div>
-                <div class="text-2xl">👥</div>
-                <div class="text-sm text-gray-600">Sức chứa</div>
-                <div class="font-semibold" id="roomCapacity"></div>
-            </div>
-            <div>
-                <div class="text-2xl">📐</div>
-                <div class="text-sm text-gray-600">Diện tích</div>
-                <div class="font-semibold" id="roomArea"></div>
-            </div>
-            <div>
-                <div class="text-2xl">📅</div>
-                <div class="text-sm text-gray-600">Có sẵn</div>
-                <div class="font-semibold" id="roomDays"></div>
-            </div>
+        <div class="flex gap-2 text-left lg:text-right w-full lg:w-auto">
+          <div
+            id="roomPrice"
+            class="text-2xl sm:text-3xl text-green-600 font-bold mb-1"
+          ></div>
+          <div class="text-gray-600 self-end">/ tháng</div>
         </div>
+      </div>
 
-        <!-- Mô tả -->
-        <section class="mb-8">
-            <h2 class="text-xl font-semibold mb-3">Mô tả chi tiết</h2>
-            <p id="roomDescription" class="text-gray-700 leading-relaxed"></p>
-        </section>
-
-        <!-- Tiện nghi -->
-        <section class="mb-10">
-            <h2 class="text-xl font-semibold mb-3">Tiện nghi</h2>
-            <div class="flex flex-wrap gap-2" id="roomFacilities"></div>
-        </section>
-
-        <!-- Nút hành động -->
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a class="flex-1 bg-green-60 text-center hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium  bg-green-600"
-                href="tel:0878808885"> 📞 Liên Hệ</a>
-
-            <a href="https://zalo.me/0878808885" target="_blank" rel="noopener noreferrer"
-                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-center">
-                💬 Chat với chủ trọ
-            </a>
+      <!-- Thông tin chi tiết -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-3 bg-gray-100 p-4 rounded-lg mb-8 text-center gap-4 sm:gap-0"
+      >
+        <div>
+          <div class="text-2xl">👥</div>
+          <div class="text-sm text-gray-600">Sức chứa</div>
+          <div class="font-semibold" id="roomCapacity"></div>
         </div>
+        <div>
+          <div class="text-2xl">📐</div>
+          <div class="text-sm text-gray-600">Diện tích</div>
+          <div class="font-semibold" id="roomArea"></div>
+        </div>
+        <div>
+          <div class="text-2xl">📅</div>
+          <div class="text-sm text-gray-600">Có sẵn</div>
+          <div class="font-semibold" id="roomDays"></div>
+        </div>
+      </div>
+
+      <!-- Mô tả -->
+      <section class="mb-8">
+        <h2 class="text-lg sm:text-xl font-semibold mb-3">Mô tả chi tiết</h2>
+        <p
+          id="roomDescription"
+          class="text-gray-700 leading-relaxed text-sm sm:text-base"
+        ></p>
+      </section>
+
+      <!-- Tiện nghi -->
+      <section class="mb-10">
+        <h2 class="text-lg sm:text-xl font-semibold mb-3">Tiện nghi</h2>
+        <div class="flex flex-wrap gap-2" id="roomFacilities"></div>
+      </section>
+
+      <!-- Nút hành động -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          class="flex-1 bg-green-60 text-center hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium bg-green-600"
+          href="tel:0878808885"
+        >
+          📞 Liên Hệ</a
+        >
+
+        <a
+          href="https://zalo.me/0878808885"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-center"
+        >
+          💬 Chat với chủ trọ
+        </a>
+      </div>
     </main>
-
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Công ty TNHH Home Phạm</h4>
-                    <p class="text-gray-400 mb-4">
-                        Địa chỉ: 162/38 Nguyễn Văn Lượng, P. Gò Vấp, TP. HCM
-                    </p>
-                </div>
-                <div>
-                    <h5 class="text-lg font-semibold mb-4">Thông Tin Liên Hệ</h5>
-                    <div class="space-y-2 text-gray-400">
-                        <p><strong class="text-white">Hotline: </strong><a href="tel:0799827979"
-                                class="text-blue-500 hover:underline">0799 82 7979</a></p>
-                        <p><strong class="text-white">Email: </strong>homepham.co@gmail.com</p>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="text-lg font-semibold mb-4">Thời Gian Làm Việc</h5>
-                    <div class="space-y-2 text-gray-400">
-                        <p>8:00 - 20:00 (Tất cả các ngày trong tuần)</p>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-xl font-bold mb-4">Công ty TNHH Home Phạm</h4>
+            <p class="text-gray-400 mb-4">
+              Địa chỉ: 162/38 Nguyễn Văn Lượng, P. Gò Vấp, TP. HCM
+            </p>
+          </div>
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Thông Tin Liên Hệ</h5>
+            <div class="space-y-2 text-gray-400">
+              <p>
+                <strong class="text-white">Hotline: </strong
+                ><a href="tel:0799827979" class="text-blue-500 hover:underline"
+                  >0799 82 7979</a
+                >
+              </p>
+              <p>
+                <strong class="text-white">Email: </strong>homepham.co@gmail.com
+              </p>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Công ty TNHH Home Phạm. Tất cả quyền được bảo lưu.</p>
+          </div>
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Thời Gian Làm Việc</h5>
+            <div class="space-y-2 text-gray-400">
+              <p>8:00 - 20:00 (Tất cả các ngày trong tuần)</p>
             </div>
+          </div>
         </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 Công ty TNHH Home Phạm. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
     </footer>
 
-    <a href="https://zalo.me/0878808885" target="_blank" rel="noopener noreferrer"
-        class="fixed bottom-4 right-4 bg-white shadow-lg rounded-full p-3 hover:scale-105 transition-transform z-50">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-8 h-8" />
+    <a
+      href="https://zalo.me/0878808885"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-4 right-4 bg-white shadow-lg rounded-full p-3 hover:scale-105 transition-transform z-50"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+        alt="Zalo"
+        class="w-8 h-8"
+      />
     </a>
-</body>
-
+  </body>
 </html>
 
 <script>
-    const data = [
-        {
-            id: 1,
-            title: "QUẬN 1",
-            price: "3,200,000₫",
-            description: "Phòng trọ cao cấp tại trung tâm thành phố, đầy đủ tiện nghi, gần trường học và khu mua sắm.",
-            rating: 5,
-            days: 15,
-            capacity: 2, //Số người
-            area: "25m²", //Diện tích
-            image: "./images/room1-1.jpg", //Ảnh tiêu đề
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-                "./images/room1-4.jpg"
-            ], //Ảnh phụ 
-            detailDescription: "Phòng trọ cao cấp tại trung tâm Quận 1, vị trí đắc địa gần các trung tâm thương mại lớn như Saigon Centre, Diamond Plaza. Phòng được trang bị đầy đủ nội thất hiện đại: giường, tủ, bàn làm việc, điều hòa, tủ lạnh, máy giặt. Có ban công thoáng mát, view đẹp nhìn ra thành phố. An ninh 24/7, thang máy, chỗ để xe riêng.", //mô tả
-            facilities: ["Điều hòa", "Tủ lạnh", "Máy giặt", "WiFi", "Ban công", "Thang máy", "Bảo vệ 24/7", "Chỗ để xe"] // tiện nghi
-        },
-        {
-            id: 2,
-            title: "QUẬN 3",
-            price: "2,800,000₫",
-            description: "Chung cư mini hiện đại với view đẹp, có ban công, bảo vệ 24/7 và thang máy.",
-            rating: 4,
-            days: 20,
-            capacity: 1,
-            area: "30m²",
-            image: "./images/room1-1.jpg",
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-                "./images/room1-4.jpg"
-            ],
-            detailDescription: "Chung cư mini cao cấp tại Quận 3, thiết kế hiện đại với không gian thoáng đãng. Phòng có cửa sổ lớn đón ánh sáng tự nhiên, ban công riêng biệt. Đầy đủ tiện nghi: giường ngủ, tủ quần áo, bàn học, điều hòa, nóng lạnh. Tòa nhà có hệ thống bảo vệ chặt chẽ, camera an ninh, thang máy hiện đại.",
-            facilities: ["Điều hòa", "Nóng lạnh", "WiFi", "Ban công", "Thang máy", "Bảo vệ", "Camera an ninh", "Cửa sổ lớn"]
-        },
-        {
-            id: 3,
-            title: "GÒ VẤP",
-            price: "2,200,000₫",
-            description: "Nhà trọ gia đình ấm cúng, có sân để xe, gần chợ và trạm xe buýt thuận tiện.",
-            rating: 5,
-            days: 8,
-            capacity: 2,
-            area: "20m²",
-            image: "./images/room1-1.jpg",
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-                "./images/room1-4.jpg"
-            ],
-            detailDescription: "Nhà trọ gia đình ấm cúng tại Gò Vấp, không gian sống thân thiện và thoải mái. Phòng sạch sẽ, thoáng mát với cửa sổ lớn. Có sân chung để xe máy, gần chợ Gò Vấp, trạm xe buýt và nhiều tiện ích. Chủ nhà thân thiện, hỗ trợ tận tình. Giá cả phải chăng, phù hợp với sinh viên và người lao động.",
-            facilities: ["Điều hòa", "WiFi", "Sân để xe", "Gần chợ", "Gần xe buýt", "Chủ nhà thân thiện", "An ninh tốt", "Giá rẻ"]
-        },
-        {
-            id: 4,
-            title: "BÌNH THẠNH",
-            price: "2,600,000₫",
-            description: "Studio apartment với không gian mở, có bếp riêng và WC khép kín hiện đại.",
-            rating: 4,
-            days: 12,
-            capacity: 1,
-            area: "28m²",
-            image: "./images/room1-1.jpg",
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-                "./images/room1-4.jpg"
-            ],
-            detailDescription: "Studio apartment hiện đại tại Bình Thạnh với thiết kế mở tạo cảm giác rộng rãi. Có bếp riêng đầy đủ dụng cụ nấu ăn, WC khép kín với thiết bị vệ sinh cao cấp. Phòng được trang bị nội thất cơ bản, điều hòa, WiFi tốc độ cao. Vị trí thuận tiện gần trung tâm, dễ dàng di chuyển đến các quận khác.",
-            facilities: ["Bếp riêng", "WC khép kín", "Điều hòa", "WiFi", "Nội thất cơ bản", "Vị trí thuận tiện", "An ninh", "Không gian mở"]
-        },
-        {
-            id: 5,
-            title: "QUẬN 7",
-            price: "3,500,000₫",
-            description: "Căn hộ dịch vụ cao cấp với đầy đủ tiện nghi, có gym và hồ bơi chung.",
-            rating: 5,
-            days: 25,
-            capacity: 2,
-            area: "35m²",
-            image: "./images/room1-1.jpg",
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-                "./images/room1-4.jpg"
-            ],
-            detailDescription: "Căn hộ dịch vụ cao cấp tại Quận 7, khu vực phát triển mạnh với nhiều tiện ích hiện đại. Phòng rộng rãi, nội thất đầy đủ và sang trọng. Tòa nhà có hồ bơi, phòng gym, BBQ area, rooftop garden. Dịch vụ dọn phòng hàng tuần, lễ tân 24/7. Gần Lotte Mart, trung tâm thương mại Crescent Mall.",
-            facilities: ["Hồ bơi", "Phòng gym", "Dọn phòng", "Lễ tân 24/7", "Nội thất cao cấp", "BBQ area", "Rooftop garden", "Gần shopping mall"]
-        },
-        {
-            id: 6,
-            title: "TÂN BÌNH",
-            price: "2,400,000₫",
-            description: "Phòng trọ gần sân bay, thuận tiện cho những người thường xuyên đi công tác.",
-            rating: 4,
-            days: 18,
-            capacity: 1,
-            area: "22m²",
-            image: "./images/room1-1.jpg",
-            images: [
-                "./images/room1-1.jpg",
-                "./images/room1-2.jpg",
-                "./images/room1-3.jpg",
-            ],
-            detailDescription: "Phòng trọ tiện nghi tại Tân Bình, vị trí đắc địa gần sân bay Tân Sơn Nhất, thuận tiện cho việc di chuyển. Phòng sạch sẽ, thoáng mát với đầy đủ nội thất cơ bản. Gần các tuyến xe buýt, metro, dễ dàng di chuyển đến trung tâm thành phố. Phù hợp cho người đi công tác thường xuyên hoặc nhân viên hàng không.",
-            facilities: ["Gần sân bay", "Điều hòa", "WiFi", "Nội thất cơ bản", "Gần xe buýt", "Gần metro", "An ninh", "Giá hợp lý"]
-        }
-    ];
+  const data = [
+    {
+      id: 1,
+      title: "GÒ VẤP",
+      type: "Phòng đơn",
+      price: "3,200,000₫",
+      description:
+        "Phòng trọ cao cấp tại trung tâm thành phố, đầy đủ tiện nghi, gần trường học và khu mua sắm.",
+      rating: 5,
+      days: 15,
+      capacity: 2,
+      area: "25m²",
+      image: "./images/p1-1.jpg",
+      video: "./videos/p1.mp4", // Video tour phòng
+      images: [
+        "./images/p1-1.jpg",
+        "./images/p1-2.jpg",
+        "./images/p1-3.jpg",
+        "./images/p1-4.jpg",
+      ],
+      detailDescription:
+        "537 Nguyễn Oanh, Phường Gò Vấp - Phòng trọ cao cấp với đầy đủ tiện nghi hiện đại. Vị trí thuận lợi gần trường học, chợ và các tuyến xe buýt chính. Phòng được trang bị đầy đủ nội thất: giường, tủ, bàn làm việc, điều hòa, tủ lạnh, máy giặt. Có ban công thoáng mát, an ninh 24/7, thang máy và chỗ để xe riêng.",
+      facilities: [
+        "Điều hòa",
+        "Tủ lạnh",
+        "Máy giặt",
+        "WiFi",
+        "Ban công",
+        "Thang máy",
+        "Bảo vệ 24/7",
+        "Chỗ để xe",
+      ],
+    },
+    {
+      id: 2,
+      title: "GÒ VẤP",
+      type: "Phòng đôi",
+      price: "2,200,000₫",
+      description:
+        "Nhà trọ gia đình ấm cúng, có sân để xe, gần chợ và trạm xe buýt thuận tiện.",
+      rating: 5,
+      days: 8,
+      capacity: 2,
+      area: "20m²",
+      image: "./images/p2-1.jpg",
+      video: "./videos/p2.mp4", // Video tour phòng
+      images: [
+        "./images/p2-1.jpg",
+        "./images/p2-2.jpg",
+        "./images/p2-3.jpg",
+        "./images/p2-4.jpg",
+      ],
+      detailDescription:
+        "162 Nguyễn Văn Lượng, P. Gò Vấp - Nhà trọ gia đình ấm cúng với không gian sống thân thiện và thoải mái. Phòng sạch sẽ, thoáng mát với cửa sổ lớn. Có sân chung để xe máy, gần chợ Gò Vấp, trạm xe buýt và nhiều tiện ích. Chủ nhà thân thiện, hỗ trợ tận tình. Giá cả phải chăng, phù hợp với sinh viên và người lao động.",
+      facilities: [
+        "Điều hòa",
+        "WiFi",
+        "Sân để xe",
+        "Gần chợ",
+        "Gần xe buýt",
+        "Chủ nhà thân thiện",
+        "An ninh tốt",
+        "Giá rẻ",
+      ],
+    },
+  ];
 
+  // Lấy ID từ URL
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"));
 
-    // Lấy ID từ URL
-    const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get("id"));
+  // Tìm phòng theo id
+  const room = data.find((r) => r.id === id);
+  if (!room) {
+    document.body.innerHTML =
+      "<div class='text-center mt-20 text-red-500'>Phòng không tồn tại.</div>";
+    throw new Error("Room not found");
+  }
 
-    // Tìm phòng theo id
-    const room = data.find(r => r.id === id);
-    if (!room) {
-        document.body.innerHTML = "<div class='text-center mt-20 text-red-500'>Phòng không tồn tại.</div>";
-        throw new Error("Room not found");
-    }
+  // Gán dữ liệu
+  document.getElementById("roomTitle").textContent = `Phòng ${room.title}`;
+  document.getElementById("roomPrice").textContent = room.price;
+  document.getElementById("roomDescription").textContent =
+    room.detailDescription;
+  document.getElementById(
+    "roomCapacity"
+  ).textContent = `${room.capacity} người`;
+  document.getElementById("roomArea").textContent = room.area;
+  document.getElementById("roomDays").textContent = `${room.days} ngày`;
 
-    // Gán dữ liệu
-    document.getElementById("roomTitle").textContent = `Phòng ${room.title}`;
-    document.getElementById("roomPrice").textContent = room.price;
-    document.getElementById("roomDescription").textContent = room.detailDescription;
-    document.getElementById("roomCapacity").textContent = `${room.capacity} người`;
-    document.getElementById("roomArea").textContent = room.area;
-    document.getElementById("roomDays").textContent = `${room.days} ngày`;
+  // Rating stars
+  const ratingContainer = document.getElementById("roomRating");
+  let stars =
+    "★".repeat(Math.floor(room.rating)) +
+    "☆".repeat(5 - Math.floor(room.rating));
+  ratingContainer.innerHTML = `${stars} <span class="text-gray-600 ml-2">(${room.rating}/5)</span>`;
 
-    // Rating stars
-    const ratingContainer = document.getElementById("roomRating");
-    let stars = "★".repeat(Math.floor(room.rating)) + "☆".repeat(5 - Math.floor(room.rating));
-    ratingContainer.innerHTML = `${stars} <span class="text-gray-600 ml-2">(${room.rating}/5)</span>`;
+  // Main image
+  const mainImage = document.getElementById("mainImage");
+  mainImage.style.backgroundImage = `url('${room.image}')`;
 
-    // Main image
+  // Thumbnails
+  const thumbnailContainer = document.getElementById("thumbnailImages");
+  thumbnailContainer.innerHTML = "";
+  room.images.forEach((imgUrl, index) => {
+    const thumb = document.createElement("div");
+    thumb.className = `h-16 sm:h-20 bg-cover bg-center rounded cursor-pointer ${
+      index === 0
+        ? "border-2 border-green-500"
+        : "hover:border-2 hover:border-green-500"
+    }`;
+    thumb.style.backgroundImage = `url('${imgUrl}')`;
+    thumb.onclick = () => {
+      mainImage.style.backgroundImage = `url('${imgUrl}')`;
+      document
+        .querySelectorAll("#thumbnailImages div")
+        .forEach((div) => div.classList.remove("border-green-500"));
+      thumb.classList.add("border-green-500");
+    };
+    thumbnailContainer.appendChild(thumb);
+  });
+
+  // Facilities
+  const facilitiesContainer = document.getElementById("roomFacilities");
+  facilitiesContainer.innerHTML = "";
+  room.facilities.forEach((fac) => {
+    const span = document.createElement("span");
+    span.className =
+      "bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm";
+    span.textContent = fac;
+    facilitiesContainer.appendChild(span);
+  });
+
+  // Video handling
+  const videoElement = document.getElementById("roomVideo");
+  const videoPlaceholder = document.getElementById("videoPlaceholder");
+
+  if (room.video) {
+    // Check if video file exists by trying to load it
+    const testVideo = document.createElement("video");
+    testVideo.onloadeddata = () => {
+      // Video exists and can be loaded
+      videoElement.src = room.video;
+      videoElement.poster = room.image; // Use room image as poster
+      videoPlaceholder.style.display = "none";
+      videoElement.style.display = "block";
+    };
+    testVideo.onerror = () => {
+      // Video doesn't exist, show placeholder
+      videoPlaceholder.style.display = "flex";
+      videoElement.style.display = "none";
+    };
+    testVideo.src = room.video;
+  } else {
+    // No video specified, show placeholder
+    videoPlaceholder.style.display = "flex";
+    videoElement.style.display = "none";
+  }
+
+  function changeImage(imageUrl) {
     const mainImage = document.getElementById("mainImage");
-    mainImage.style.backgroundImage = `url('${room.image}')`;
-
-    // Thumbnails
-    const thumbnailContainer = document.getElementById("thumbnailImages");
-    thumbnailContainer.innerHTML = "";
-    room.images.forEach((imgUrl, index) => {
-        const thumb = document.createElement("div");
-        thumb.className = `h-20 bg-cover bg-center rounded cursor-pointer ${index === 0 ? "border-2 border-green-500" : "hover:border-2 hover:border-green-500"}`;
-        thumb.style.backgroundImage = `url('${imgUrl}')`;
-        thumb.onclick = () => {
-            mainImage.style.backgroundImage = `url('${imgUrl}')`;
-            document.querySelectorAll("#thumbnailImages div").forEach(div => div.classList.remove("border-green-500"));
-            thumb.classList.add("border-green-500");
-        };
-        thumbnailContainer.appendChild(thumb);
-    });
-
-    // Facilities
-    const facilitiesContainer = document.getElementById("roomFacilities");
-    facilitiesContainer.innerHTML = "";
-    room.facilities.forEach(fac => {
-        const span = document.createElement("span");
-        span.className = "bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm";
-        span.textContent = fac;
-        facilitiesContainer.appendChild(span);
-    });
-    function changeImage(imageUrl) {
-        const mainImage = document.getElementById('mainImage');
-        mainImage.style.backgroundImage = `url('${imageUrl}')`;
-    }
+    mainImage.style.backgroundImage = `url('${imageUrl}')`;
+  }
 </script>

@@ -1,293 +1,339 @@
 <!DOCTYPE html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Phạm - Cho Thuê Phòng Trọ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-        body {
-            font-family: "Times New Roman", serif;
-        }
+      body {
+        font-family: "Times New Roman", serif;
+      }
 
-        .hero-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('./images//hero.jpg');
-            background-size: cover;
-            background-position: center;
-        }
+      .hero-bg {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+          url("./images//hero.jpg");
+        background-size: cover;
+        background-position: center;
+      }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
 
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
 
-        .rating-stars {
-            color: #fbbf24;
-        }
+      .rating-stars {
+        color: #fbbf24;
+      }
 
-        .room-image {
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-        }
+      .room-image {
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+      }
 
-        .modal {
-            display: none;
-        }
+      .modal {
+        display: none;
+      }
 
-        .modal.active {
-            display: flex;
-        }
+      .modal.active {
+        display: flex;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-gray-50">
+  <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
-            <div class="flex mx-auto justify-between items-center h-16">
-                <figure class="flex items-center mx-auto sm:mx-0  w-[16rem] lg:w-[14rem] h-[4rem]">
-                    <img class="w-full h-full object-cover" src="./images/logo-prve.png" alt="">
-                </figure>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-700 hover:text-green-600">Trang Chủ</a>
-                    <a href="https://zalo.me/0878808885" target="_blank" class="text-gray-700 hover:text-green-600">Liên
-                        Hệ</a>
-                </nav>
-
-            </div>
+      <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
+        <div class="flex mx-auto justify-between items-center h-16">
+          <figure
+            class="flex items-center mx-auto sm:mx-0 w-[16rem] lg:w-[14rem] h-[4rem]"
+          >
+            <img
+              class="w-full h-full object-cover"
+              src="./images/logo-prve.png"
+              alt=""
+            />
+          </figure>
+          <nav class="hidden md:flex space-x-8">
+            <a href="#" class="text-gray-700 hover:text-green-600">Trang Chủ</a>
+            <a
+              href="https://zalo.me/0878808885"
+              target="_blank"
+              class="text-gray-700 hover:text-green-600"
+              >Liên Hệ</a
+            >
+          </nav>
         </div>
+      </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-bg h-96 flex items-center justify-center text-white relative">
-        <div class="text-center max-w-4xl mx-auto px-4">
-            <h2 class="text-4xl mt-[100px] md:text-6xl font-light mb-8 leading-tight">
-                Tìm phòng trọ,<br>
-                không phải khách sạn.
-            </h2>
+    <section
+      class="hero-bg h-96 flex items-center justify-center text-white relative"
+    >
+      <div class="text-center max-w-4xl mx-auto px-4">
+        <h2
+          class="text-4xl mt-[100px] md:text-6xl font-light mb-8 leading-tight"
+        >
+          Tìm phòng trọ,<br />
+          không phải khách sạn.
+        </h2>
 
-            <!-- Search Form -->
-            <div id="searchForm" class="bg-white bg-opacity-90 backdrop-blur-sm rounded-lg p-6 shadow-xl">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                    <div class="text-left">
-                        <label class="block text-sm text-gray-600 mb-2">Loại phòng</label>
-                        <select id="roomTypeSelect" class="w-full p-3 border border-gray-300 rounded-md text-gray-700">
-                            <option value="">Tất cả</option>
-                            <option value="Phòng đơn">Phòng đơn</option>
-                            <option value="Phòng đôi">Phòng đôi</option>
-                            <option value="Chung cư mini">Chung cư mini</option>
-                        </select>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="text-left">
-                            <label class="block text-sm text-gray-600 mb-2">Giá từ</label>
-                            <input id="priceFrom" type="text" placeholder="2,000,000"
-                                class="w-full p-3 border border-gray-300 rounded-md text-gray-700">
-                        </div>
-                        <div class="text-left">
-                            <label class="block text-sm text-gray-600 mb-2">Đến</label>
-                            <input id="priceTo" type="text" placeholder="5,000,000"
-                                class="w-full p-3 border border-gray-300 rounded-md text-gray-700">
-                        </div>
-                    </div>
-                </div>
-                <button id="searchButton"
-                    class="w-full md:w-auto mt-4 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-md font-medium transition-colors">
-                    TÌM KIẾM
-                </button>
+        <!-- Search Form -->
+        <div
+          id="searchForm"
+          class="bg-white bg-opacity-90 backdrop-blur-sm rounded-lg p-6 shadow-xl"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+            <div class="text-left">
+              <label class="block text-sm text-gray-600 mb-2">Loại phòng</label>
+              <select
+                id="roomTypeSelect"
+                class="w-full p-3 border border-gray-300 rounded-md text-gray-700"
+              >
+                <option value="">Tất cả</option>
+                <option value="Phòng đơn">Phòng đơn</option>
+                <option value="Phòng đôi">Phòng đôi</option>
+                <option value="Chung cư mini">Chung cư mini</option>
+              </select>
             </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-left">
+                <label class="block text-sm text-gray-600 mb-2">Giá từ</label>
+                <input
+                  id="priceFrom"
+                  type="text"
+                  placeholder="2,000,000"
+                  class="w-full p-3 border border-gray-300 rounded-md text-gray-700"
+                />
+              </div>
+              <div class="text-left">
+                <label class="block text-sm text-gray-600 mb-2">Đến</label>
+                <input
+                  id="priceTo"
+                  type="text"
+                  placeholder="5,000,000"
+                  class="w-full p-3 border border-gray-300 rounded-md text-gray-700"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            id="searchButton"
+            class="w-full md:w-auto mt-4 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-md font-medium transition-colors"
+          >
+            TÌM KIẾM
+          </button>
         </div>
+      </div>
     </section>
 
     <!-- Main Content -->
     <main class="max-w-7xl mt-20 mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="text-center mb-16">
-            <h3 class="text-3xl font-light text-gray-900 mb-4">CHÚNG TÔI LỰA CHỌN CHO BẠN</h3>
-            <div class="w-16 h-px bg-gray-400 mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Khám phá những phòng trọ chất lượng cao với đầy đủ tiện nghi, vị trí thuận lợi và giá cả hợp lý.
-                Chúng tôi cam kết mang đến cho bạn trải nghiệm thuê trọ tốt nhất.
-            </p>
-        </div>
+      <div class="text-center mb-16">
+        <h3 class="text-3xl font-light text-gray-900 mb-4">
+          CHÚNG TÔI LỰA CHỌN CHO BẠN
+        </h3>
+        <div class="w-16 h-px bg-gray-400 mx-auto mb-6"></div>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Khám phá những phòng trọ chất lượng cao với đầy đủ tiện nghi, vị trí
+          thuận lợi và giá cả hợp lý. Chúng tôi cam kết mang đến cho bạn trải
+          nghiệm thuê trọ tốt nhất.
+        </p>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="roomGrid">
-        </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="roomGrid"
+      ></div>
     </main>
 
-    <div id="roomModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
-        <div class="bg-white rounded-lg max-w-4xl w-full mx-4 max-h-screen overflow-y-auto">
-            <div class="relative">
-                <button class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-                <div id="modalContent">
-                </div>
-            </div>
+    <div
+      id="roomModal"
+      class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-lg max-w-4xl w-full mx-4 max-h-screen overflow-y-auto"
+      >
+        <div class="relative">
+          <button
+            class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 z-10"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+          <div id="modalContent"></div>
         </div>
+      </div>
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Công ty TNHH Home Phạm</h4>
-                    <p class="text-gray-400 mb-4">
-                        Địa chỉ: 162/38 Nguyễn Văn Lượng, P. Gò Vấp, TP. HCM
-                    </p>
-                </div>
-                <div>
-                    <h5 class="text-lg font-semibold mb-4">Thông Tin Liên Hệ</h5>
-                    <div class="space-y-2 text-gray-400">
-                        <p><strong class="text-white">Hotline: </strong><a href="tel:0799827979"
-                                class="text-blue-500 hover:underline">0799 82 7979</a></p>
-                        <p><strong class="text-white">Email: </strong>homepham.co@gmail.com</p>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="text-lg font-semibold mb-4">Thời Gian Làm Việc</h5>
-                    <div class="space-y-2 text-gray-400">
-                        <p>8:00 - 20:00 (Tất cả các ngày trong tuần)</p>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-xl font-bold mb-4">Công ty TNHH Home Phạm</h4>
+            <p class="text-gray-400 mb-4">
+              Địa chỉ: 162/38 Nguyễn Văn Lượng, P. Gò Vấp, TP. HCM
+            </p>
+          </div>
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Thông Tin Liên Hệ</h5>
+            <div class="space-y-2 text-gray-400">
+              <p>
+                <strong class="text-white">Hotline: </strong
+                ><a href="tel:0799827979" class="text-blue-500 hover:underline"
+                  >0799 82 7979</a
+                >
+              </p>
+              <p>
+                <strong class="text-white">Email: </strong>homepham.co@gmail.com
+              </p>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Công ty TNHH Home Phạm. Tất cả quyền được bảo lưu.</p>
+          </div>
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Thời Gian Làm Việc</h5>
+            <div class="space-y-2 text-gray-400">
+              <p>8:00 - 20:00 (Tất cả các ngày trong tuần)</p>
             </div>
+          </div>
         </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2025 Công ty TNHH Home Phạm. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
     </footer>
 
-    <a href="https://zalo.me/0878808885" target="_blank" rel="noopener noreferrer"
-        class="fixed bottom-4 right-4 bg-white shadow-lg rounded-full p-3 hover:scale-105 transition-transform z-50">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-8 h-8" />
+    <a
+      href="https://zalo.me/0878808885"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-4 right-4 bg-white shadow-lg rounded-full p-3 hover:scale-105 transition-transform z-50"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+        alt="Zalo"
+        class="w-8 h-8"
+      />
     </a>
 
     <script>
-        // Room data
-        const rooms = [
-            {
-                id: 1,
-                title: "QUẬN 1",
-                type: "Phòng đôi", //Loại phòng
-                price: "3,200,000₫",
-                description: "Phòng trọ cao cấp tại trung tâm thành phố, đầy đủ tiện nghi, gần trường học và khu mua sắm.", //Mô tả ngắn
-                rating: 5,
-                days: 15,
-                capacity: 2,
-                area: "25m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Phòng trọ cao cấp tại trung tâm Quận 1...", //Phòng ở đâu
-                facilities: ["Điều hòa", "Tủ lạnh", "Máy giặt", "WiFi", "Ban công", "Thang máy", "Bảo vệ 24/7", "Chỗ để xe"] //Tiện nghi
-            },
-            {
-                id: 2,
-                title: "QUẬN 3",
-                type: "Chung cư mini",
-                price: "2,800,000₫",
-                description: "Chung cư mini hiện đại với view đẹp, có ban công, bảo vệ 24/7 và thang máy.",
-                rating: 4,
-                days: 20,
-                capacity: 1,
-                area: "30m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Chung cư mini cao cấp tại Quận 3...",
-                facilities: ["Điều hòa", "Nóng lạnh", "WiFi", "Ban công", "Thang máy", "Bảo vệ", "Camera an ninh", "Cửa sổ lớn"]
-            },
-            {
-                id: 3,
-                title: "GÒ VẤP",
-                type: "Phòng đôi",
-                price: "2,200,000₫",
-                description: "Nhà trọ gia đình ấm cúng, có sân để xe, gần chợ và trạm xe buýt thuận tiện.",
-                rating: 5,
-                days: 8,
-                capacity: 2,
-                area: "20m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Nhà trọ gia đình ấm cúng tại Gò Vấp...",
-                facilities: ["Điều hòa", "WiFi", "Sân để xe", "Gần chợ", "Gần xe buýt", "Chủ nhà thân thiện", "An ninh tốt", "Giá rẻ"]
-            },
-            {
-                id: 4,
-                title: "BÌNH THẠNH",
-                type: "Studio",
-                price: "2,600,000₫",
-                description: "Studio apartment với không gian mở, có bếp riêng và WC khép kín hiện đại.",
-                rating: 4,
-                days: 12,
-                capacity: 1,
-                area: "28m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Studio apartment hiện đại tại Bình Thạnh...",
-                facilities: ["Bếp riêng", "WC khép kín", "Điều hòa", "WiFi", "Nội thất cơ bản", "Vị trí thuận tiện", "An ninh", "Không gian mở"]
-            },
-            {
-                id: 5,
-                title: "QUẬN 7",
-                type: "Chung cư mini",
-                price: "3,500,000₫",
-                description: "Căn hộ dịch vụ cao cấp với đầy đủ tiện nghi, có gym và hồ bơi chung.",
-                rating: 5,
-                days: 25,
-                capacity: 2,
-                area: "35m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Căn hộ dịch vụ cao cấp tại Quận 7...",
-                facilities: ["Hồ bơi", "Phòng gym", "Dọn phòng", "Lễ tân 24/7", "Nội thất cao cấp", "BBQ area", "Rooftop garden", "Gần shopping mall"]
-            },
-            {
-                id: 6,
-                title: "TÂN BÌNH",
-                type: "Phòng đơn",
-                price: "2,400,000₫",
-                description: "Phòng trọ gần sân bay, thuận tiện cho những người thường xuyên đi công tác.",
-                rating: 4,
-                days: 18,
-                capacity: 1,
-                area: "22m²",
-                image: "./images/room1-1.jpg",
-                detailDescription: "Phòng trọ tiện nghi tại Tân Bình...",
-                facilities: ["Gần sân bay", "Điều hòa", "WiFi", "Nội thất cơ bản", "Gần xe buýt", "Gần metro", "An ninh", "Giá hợp lý"]
-            }
-        ];
+      const rooms = [
+        {
+          id: 1,
+          title: "GÒ VẤP",
+          type: "Phòng đơn",
+          price: "3,200,000₫",
+          description:
+            "Phòng trọ cao cấp tại trung tâm thành phố, đầy đủ tiện nghi, gần trường học và khu mua sắm.",
+          rating: 5,
+          days: 15,
+          capacity: 2,
+          area: "25m²",
+          image: "./images/p1-1.jpg",
+          video: "./videos/p1.mp4", // Video tour phòng
+          detailDescription: "537 Nguyễn Oanh, Phường Gò Vấp",
+          facilities: [
+            "Điều hòa",
+            "Tủ lạnh",
+            "Máy giặt",
+            "WiFi",
+            "Ban công",
+            "Thang máy",
+            "Bảo vệ 24/7",
+            "Chỗ để xe",
+          ],
+        },
+        {
+          id: 2,
+          title: "GÒ VẤP",
+          type: "Phòng đôi",
+          price: "2,200,000₫",
+          description:
+            "Nhà trọ gia đình ấm cúng, có sân để xe, gần chợ và trạm xe buýt thuận tiện.",
+          rating: 5,
+          days: 8,
+          capacity: 2,
+          area: "20m²",
+          image: "./images/p2-1.jpg",
+          video: "./videos/p2.mp4", // Video tour phòng
+          detailDescription: "162 Nguyễn Văn Lượng, P. Gò Vấp",
+          facilities: [
+            "Điều hòa",
+            "WiFi",
+            "Sân để xe",
+            "Gần chợ",
+            "Gần xe buýt",
+            "Chủ nhà thân thiện",
+            "An ninh tốt",
+            "Giá rẻ",
+          ],
+        },
+      ];
 
+      // Render rooms
+      function renderRooms(roomsToRender = rooms) {
+        const roomGrid = document.getElementById("roomGrid");
+        roomGrid.innerHTML = "";
 
-        // Render rooms
-        function renderRooms(roomsToRender = rooms) {
-            const roomGrid = document.getElementById('roomGrid');
-            roomGrid.innerHTML = '';
+        roomsToRender.forEach((room) => {
+          const roomCard = document.createElement("div");
+          roomCard.className =
+            "bg-white rounded-lg shadow-md overflow-hidden card-hover cursor-pointer";
+          roomCard.onclick = () => {
+            window.location.href = `room-detail.html?id=${room.id}`;
+          };
 
-            roomsToRender.forEach(room => {
-                const roomCard = document.createElement('div');
-                roomCard.className = 'bg-white rounded-lg shadow-md overflow-hidden card-hover cursor-pointer';
-                roomCard.onclick = () => {
-                    window.location.href = `room-detail.html?id=${room.id}`;
-                };
+          const stars = "★".repeat(room.rating) + "☆".repeat(5 - room.rating);
 
-                const stars = '★'.repeat(room.rating) + '☆'.repeat(5 - room.rating);
-
-                roomCard.innerHTML = `
-            <div class="h-48 room-image bg-cover bg-center" style="background-image: url('${room.image}')"></div>
+          roomCard.innerHTML = `
+            <div class="h-48 room-image bg-cover bg-center relative" style="background-image: url('${
+              room.image
+            }')">
+              ${
+                room.video
+                  ? '<div class="absolute top-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">🎥 Video</div>'
+                  : ""
+              }
+            </div>
             <div class="p-6">
                 <div class="flex justify-between items-start mb-2">
-                    <h4 class="text-xl font-semibold text-gray-900">${room.title}</h4>
-                    <span class="text-xl font-bold text-green-600">${room.price}</span>
+                    <h4 class="text-xl font-semibold text-gray-900">${
+                      room.title
+                    }</h4>
+                    <span class="text-xl font-bold text-green-600">${
+                      room.price
+                    }</span>
                 </div>
                 <p class="text-gray-600 text-sm mb-4">${room.description}</p>
                 <div class="flex items-center justify-between text-sm text-gray-500">
-                    <div><span class="rating-stars">${stars}</span> <span class="ml-1">${room.days} ngày</span></div>
+                    <div><span class="rating-stars">${stars}</span> <span class="ml-1">${
+            room.days
+          } ngày</span></div>
                     <div class="flex space-x-4">
                         <span>👥 ${room.capacity}</span>
                         <span>📐 ${room.area}</span>
@@ -296,49 +342,50 @@
             </div>
         `;
 
-                roomGrid.appendChild(roomCard);
-            });
-        }
+          roomGrid.appendChild(roomCard);
+        });
+      }
 
+      document.addEventListener("DOMContentLoaded", function () {
+        renderRooms();
+      });
 
+      document.getElementById("searchButton").onclick = () => {
+        const selectedType = document
+          .getElementById("roomTypeSelect")
+          .value.trim();
+        const priceFrom =
+          parseInt(
+            document.getElementById("priceFrom").value.replace(/[^0-9]/g, "")
+          ) || 0;
+        const priceTo =
+          parseInt(
+            document.getElementById("priceTo").value.replace(/[^0-9]/g, "")
+          ) || Infinity;
 
-        document.addEventListener('DOMContentLoaded', function () {
-            renderRooms();
+        const filteredRooms = rooms.filter((room) => {
+          const roomPrice = parseInt(room.price.replace(/[^0-9]/g, ""));
+          const matchType = !selectedType || room.type === selectedType;
+          const matchPrice = roomPrice >= priceFrom && roomPrice <= priceTo;
+          return matchType && matchPrice;
         });
 
-        document.getElementById("searchButton").onclick = () => {
-            const selectedType = document.getElementById("roomTypeSelect").value.trim();
-            const priceFrom = parseInt(document.getElementById("priceFrom").value.replace(/[^0-9]/g, '')) || 0;
-            const priceTo = parseInt(document.getElementById("priceTo").value.replace(/[^0-9]/g, '')) || Infinity;
+        renderRooms(filteredRooms);
+      };
 
-            const filteredRooms = rooms.filter(room => {
-                const roomPrice = parseInt(room.price.replace(/[^0-9]/g, ''));
-                const matchType = !selectedType || room.type === selectedType;
-                const matchPrice = roomPrice >= priceFrom && roomPrice <= priceTo;
-                return matchType && matchPrice;
-            });
-
-            renderRooms(filteredRooms);
-        };
-
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          });
         });
-
-
+      });
     </script>
-</body>
-
+  </body>
 </html>
